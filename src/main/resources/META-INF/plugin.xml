@@ -10,9 +10,12 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <codeInsight.inlayProvider
-                implementationClass="com.github.themasihzn.mathdsl.inlay.GammaInlayHintsProvider"
-                language="kotlin"/>
+<!--        <codeInsight.inlayProvider-->
+<!--                implementationClass="com.github.themasihzn.mathdsl.inlay.GammaInlayHintsProvider"-->
+<!--                language="kotlin"/>-->
+        <lang.foldingBuilder
+                language="kotlin"
+                implementationClass="com.github.themasihzn.mathdsl.inlay.GammaFoldingBuilder"/>
     </extensions>
 
 

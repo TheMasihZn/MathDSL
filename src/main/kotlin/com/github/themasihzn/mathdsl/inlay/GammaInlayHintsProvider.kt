@@ -30,7 +30,6 @@ class GammaInlayHintsProvider : InlayHintsProvider<GammaSettings> {
                 return false
             }
         }
-
         return object : FactoryInlayHintsCollector(editor) {
             override fun collect(element: PsiElement, editor: Editor, sink: InlayHintsSink): Boolean {
                 if (element is KtCallExpression &&
@@ -38,12 +37,20 @@ class GammaInlayHintsProvider : InlayHintsProvider<GammaSettings> {
                     element.valueArguments.size == 1
                 ) {
                     val arg = element.valueArguments.first().getArgumentExpression()?.text ?: "?"
-                    val presentation = factory.smallText("Γ$arg")
-                    sink.addInlineElement(element.textRange.endOffset, false, presentation, false)
+                    val presentation = factory.text("Γ$arg")
+
+                    // Key change: replace the function call text with the symbol
+                    sink.addInlineElement(
+                        element.textRange.startOffset, // place it at the start of the function call
+                        false, // don't associate it with surrounding text
+                        presentation,
+                        false
+                    )
                 }
                 return true
             }
         }
+
     }
 
     override fun createConfigurable(settings: GammaSettings): ImmediateConfigurable =
