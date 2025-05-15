@@ -13,9 +13,12 @@
 <!--        <codeInsight.inlayProvider-->
 <!--                implementationClass="com.github.themasihzn.mathdsl.inlay.GammaInlayHintsProvider"-->
 <!--                language="kotlin"/>-->
+<!--        <lang.foldingBuilder-->
+<!--                language="kotlin"-->
+<!--                implementationClass="com.github.themasihzn.mathdsl.inlay.GammaFoldingBuilder"/>-->
         <lang.foldingBuilder
                 language="kotlin"
-                implementationClass="com.github.themasihzn.mathdsl.inlay.GammaFoldingBuilder"/>
+                implementationClass="com.github.themasihzn.mathdsl.folding.MathSymbolFoldingBuilder"/>
     </extensions>
 
 
