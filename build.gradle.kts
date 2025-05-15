@@ -103,6 +103,7 @@ intellijPlatform {
     pluginVerification {
         ides {
             recommended()
+
         }
     }
 }

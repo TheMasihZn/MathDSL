@@ -5,11 +5,15 @@
     <vendor>themasihzn</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.kotlin</depends>
 
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.themasihzn.mathdsl.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-        <postStartupActivity implementation="com.github.themasihzn.mathdsl.startup.MyProjectActivity" />
+        <codeInsight.inlayProvider
+                implementationClass="com.github.themasihzn.mathdsl.inlay.GammaInlayHintsProvider"
+                language="kotlin"/>
     </extensions>
+
+
 </idea-plugin>
