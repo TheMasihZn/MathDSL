@@ -8,9 +8,9 @@ import com.intellij.openapi.editor.event.CaretListener
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.startup.ProjectActivity
 
-class FoldingCaretTrackerService : ProjectActivity {
+class FoldingCaretTrackerActivity : ProjectActivity {
 
-    private val logger = Logger.getInstance(FoldingCaretTrackerService::class.java)
+    private val logger = Logger.getInstance(FoldingCaretTrackerActivity::class.java)
 
     override suspend fun execute(project: Project) {
         readAction {

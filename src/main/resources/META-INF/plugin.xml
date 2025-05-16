@@ -20,7 +20,7 @@
                 language="kotlin"
                 implementationClass="com.github.themasihzn.mathdsl.folding.MathFoldingBuilder"/>
 
-        <postStartupActivity implementation="com.github.themasihzn.mathdsl.services.FoldingCaretTrackerService"/>
+        <postStartupActivity implementation="com.github.themasihzn.mathdsl.services.FoldingCaretTrackerActivity"/>
 
     </extensions>
 
