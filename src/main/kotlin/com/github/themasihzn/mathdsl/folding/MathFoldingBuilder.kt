@@ -1,5 +1,6 @@
 package com.github.themasihzn.mathdsl.folding
 
+import com.github.themasihzn.mathdsl.scripter.ScriptBuilder
 import com.intellij.lang.ASTNode
 import com.intellij.lang.folding.FoldingBuilderEx
 import com.intellij.lang.folding.FoldingDescriptor
@@ -23,16 +24,30 @@ class MathFoldingBuilder : FoldingBuilderEx() {
                     val function = PsiTreeUtil.findChildrenOfType(root, KtNamedFunction::class.java)
                         .find { it.name == calleeName }
 
-                    val annotation = function?.annotationEntries?.find {
-                        it.shortName?.asString()?.contains( "Math") == true
+                    val mathAnnotation = function?.annotationEntries?.find {
+                        it.shortName?.asString() == "Math"
                     }
-
-                    val symbolArg = annotation?.valueArguments?.firstOrNull()?.getArgumentExpression()?.text
+                    val symbolArg = mathAnnotation?.valueArguments?.firstOrNull()?.getArgumentExpression()?.text
                     val symbol = symbolArg?.removeSurrounding("\"") ?: return
 
-                    val arg = element.valueArguments.firstOrNull()?.getArgumentExpression()?.text ?: "?"
-                    val placeholder = "$symbol$arg"
+                    val arguments = element.valueArguments
+                    val parameterList = function.valueParameters
 
+                    val scriptSuffix = buildString {
+                        for ((index, param) in parameterList.withIndex()) {
+                            val argExpr = arguments.getOrNull(index)?.getArgumentExpression()?.text ?: "?"
+                            val annotations = param.annotationEntries.mapNotNull { it.shortName?.asString() }
+
+                            when {
+                                "Super" in annotations -> append(ScriptBuilder.toSuperscript(argExpr))
+                                "Sub" in annotations -> append(ScriptBuilder.toSubscript(argExpr))
+//                                else -> append(argExpr)
+                                else -> {}
+                            }
+                        }
+                    }
+
+                    val placeholder = "$symbol$scriptSuffix"
                     descriptors.add(FoldingDescriptor(element.node, element.textRange, null, placeholder))
                 }
 
