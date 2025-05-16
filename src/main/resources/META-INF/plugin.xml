@@ -16,9 +16,15 @@
 <!--        <lang.foldingBuilder-->
 <!--                language="kotlin"-->
 <!--                implementationClass="com.github.themasihzn.mathdsl.inlay.GammaFoldingBuilder"/>-->
+
+
         <lang.foldingBuilder
                 language="kotlin"
                 implementationClass="com.github.themasihzn.mathdsl.folding.MathFoldingBuilder"/>
+
+        <codeInsight.inlayProvider
+                implementationClass="com.github.themasihzn.mathdsl.inlay.MathInlayHintsProvider"
+                language="kotlin"/>
 
         <postStartupActivity implementation="com.github.themasihzn.mathdsl.services.FoldingCaretTrackerActivity"/>
 
