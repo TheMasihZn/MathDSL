@@ -1,6 +1,6 @@
 package com.github.themasihzn.mathdsl.scripter
 
-class ScriptBuilder {
+object ScriptBuilder {
     private val superscriptMap = mapOf(
         '0' to '⁰', '1' to '¹', '2' to '²', '3' to '³', '4' to '⁴',
         '5' to '⁵', '6' to '⁶', '7' to '⁷', '8' to '⁸', '9' to '⁹',
@@ -19,11 +19,9 @@ class ScriptBuilder {
         'v' to 'ᵥ', 'x' to 'ₓ'
     )
 
-    companion object {
-        private val instance = ScriptBuilder()
-        fun toSuperscript(text: String): String =
-            text.map { instance.superscriptMap[it.lowercaseChar()] ?: it }.joinToString("")
-        fun toSubscript(text: String): String =
-            text.map { instance.subscriptMap[it.lowercaseChar()] ?: it }.joinToString("")
-    }
+    fun toSuperscript(text: String): String =
+        text.map { superscriptMap[it.lowercaseChar()] ?: it }.joinToString("")
+
+    fun toSubscript(text: String): String =
+        text.map { subscriptMap[it.lowercaseChar()] ?: it }.joinToString("")
 }
