@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil
 import org.jetbrains.kotlin.psi.KtCallExpression
 import org.jetbrains.kotlin.psi.KtNamedFunction
 
-class MathSymbolFoldingBuilder : FoldingBuilderEx() {
+class MathFoldingBuilder : FoldingBuilderEx() {
     override fun buildFoldRegions(root: PsiElement, document: Document, quick: Boolean): Array<FoldingDescriptor> {
         val descriptors = mutableListOf<FoldingDescriptor>()
 
@@ -24,7 +24,7 @@ class MathSymbolFoldingBuilder : FoldingBuilderEx() {
                         .find { it.name == calleeName }
 
                     val annotation = function?.annotationEntries?.find {
-                        it.shortName?.asString() == "MathSymbol"
+                        it.shortName?.asString()?.contains( "Math") == true
                     }
 
                     val symbolArg = annotation?.valueArguments?.firstOrNull()?.getArgumentExpression()?.text
