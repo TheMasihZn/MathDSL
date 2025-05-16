@@ -33,7 +33,8 @@ class MathFoldingBuilder : FoldingBuilderEx() {
                     val arguments = element.valueArguments
                     val parameterList = function.valueParameters
 
-                    val scriptSuffix = buildString {
+                    val placeholder = buildString {
+                        append(symbol)
                         for ((index, param) in parameterList.withIndex()) {
                             val argExpr = arguments.getOrNull(index)?.getArgumentExpression()?.text ?: "?"
                             val annotations = param.annotationEntries.mapNotNull { it.shortName?.asString() }
@@ -41,13 +42,11 @@ class MathFoldingBuilder : FoldingBuilderEx() {
                             when {
                                 "Super" in annotations -> append(ScriptBuilder.toSuperscript(argExpr))
                                 "Sub" in annotations -> append(ScriptBuilder.toSubscript(argExpr))
-//                                else -> append(argExpr)
-                                else -> {}
+                                else -> append(ScriptBuilder.toSuperscript(argExpr)) // Treat unannotated as superscript
                             }
                         }
                     }
 
-                    val placeholder = "$symbol$scriptSuffix"
                     descriptors.add(FoldingDescriptor(element.node, element.textRange, null, placeholder))
                 }
 
@@ -60,4 +59,5 @@ class MathFoldingBuilder : FoldingBuilderEx() {
 
     override fun getPlaceholderText(node: ASTNode): String = "..."
     override fun isCollapsedByDefault(node: ASTNode): Boolean = true
+
 }
