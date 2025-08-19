@@ -18,9 +18,9 @@
 <!--                implementationClass="com.github.themasihzn.mathdsl.inlay.GammaFoldingBuilder"/>-->
 
 
-        <lang.foldingBuilder
-                language="kotlin"
-                implementationClass="com.github.themasihzn.mathdsl.folding.MathFoldingBuilder"/>
+<!--        <lang.foldingBuilder-->
+<!--                language="kotlin"-->
+<!--                implementationClass="com.github.themasihzn.mathdsl.folding.MathFoldingBuilder"/>-->
 
         <codeInsight.inlayProvider
                 implementationClass="com.github.themasihzn.mathdsl.inlay.MathInlayHintsProvider"

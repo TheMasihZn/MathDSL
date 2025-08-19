@@ -3,7 +3,7 @@
 package com.github.themasihzn.mathdsl
 
 @Target(AnnotationTarget.FUNCTION)
-annotation class Math(val symbol: String)
+annotation class Live(val hint: String)
 
 @Target(AnnotationTarget.VALUE_PARAMETER)
 annotation class Super
